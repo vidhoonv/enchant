@@ -72,11 +72,11 @@ void test_basic_spell_check()
 
 	g_assert(enchant_dict_check(eng_dict,tc,strlen(tc)) == enchant_dict_check(cdict, tc, strlen(tc)));
 
-	printf("test1 complete\n");
+	printf("basic spell check complete\n");
 //cleanup
-	g_free(broker);
-	g_free(eng_dict);
-	g_free(cdict);
+	enchant_broker_free_dict (broker, eng_dict);
+	enchant_broker_free_dict (broker, cdict);
+	enchant_broker_free (broker);
 }
 
 void test_spell_check_for_compdict_with_word_misspelled_in_one_of_the_langs()
@@ -129,12 +129,12 @@ void test_spell_check_for_compdict_with_word_misspelled_in_one_of_the_langs()
 
 	g_assert(enchant_dict_check(fr_dict,tc,strlen(tc)) == enchant_dict_check(cdict, tc, strlen(tc)));
 
-	printf("test2 complete\n");
+	printf("test for spell check with word misspelled in one of the langs complete\n");
 //cleanup
-	g_free(broker);
-	g_free(eng_dict);
-	g_free(fr_dict);
-	g_free(cdict);
+	enchant_broker_free_dict (broker, eng_dict);
+	enchant_broker_free_dict (broker, fr_dict);
+	enchant_broker_free_dict (broker, cdict);
+	enchant_broker_free (broker);	
 }
 
 void test_spell_check_for_compdict_for_word_with_no_suggestions_in_all_langs()
@@ -194,12 +194,12 @@ void test_spell_check_for_compdict_for_word_with_no_suggestions_in_all_langs()
 	g_assert_cmpint(n_sug_fr, ==,0);
 	g_assert_cmpint(n_sug_comp, ==,0);
 
-	printf("test3 complete\n");
+	printf("test for spell check for word with no suggestions in all langs complete\n");
 //cleanup
-	g_free(broker);
-	g_free(eng_dict);
-	g_free(fr_dict);
-	g_free(cdict);
+	enchant_broker_free_dict (broker, eng_dict);
+	enchant_broker_free_dict (broker, fr_dict);
+	enchant_broker_free_dict (broker, cdict);
+	enchant_broker_free (broker);
 }
 
 void test_spell_check_for_compdict_with_word_mispelled_in_all_langs()
@@ -256,12 +256,11 @@ void test_spell_check_for_compdict_with_word_mispelled_in_all_langs()
 //just asserting the number of suggestions to begin with
 	g_assert_cmpint(n_sug_comp, ==, n_sug_eng+n_sug_fr);
 
-	printf("test6 complete\n");
+	printf("test for spell check with word misspelled in all langs complete\n");
 //cleanup
-	g_free(broker);
-	g_free(eng_dict);
-	g_free(cdict);
-
+	enchant_broker_free_dict (broker, eng_dict);
+	enchant_broker_free_dict (broker, cdict);
+	enchant_broker_free (broker);
 }
 
 
