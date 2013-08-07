@@ -36,7 +36,7 @@
 #include "composite_provider.h"
 
 
-void test1()
+void test_basic_spell_check()
 {
 	//test string
 	char tc[]="abcd";
@@ -79,7 +79,7 @@ void test1()
 	g_free(cdict);
 }
 
-void test2()
+void test_spell_check_for_compdict_with_word_misspelled_in_one_of_the_langs()
 {
 	//test string
 	char tc[]="indien";
@@ -137,7 +137,7 @@ void test2()
 	g_free(cdict);
 }
 
-void test3()
+void test_spell_check_for_compdict_for_word_with_no_suggestions_in_all_langs()
 {
 	//test string
 	char tc[]="‘abcdefghijklmnop";
@@ -202,7 +202,7 @@ void test3()
 	g_free(cdict);
 }
 
-void test6()
+void test_spell_check_for_compdict_with_word_mispelled_in_all_langs()
 {
 	//test string
 	char tc[]="‘teh";
@@ -269,10 +269,10 @@ int main(int argc, char **argv)
 {
 
 	   g_test_init(&argc,&argv,NULL);
-           g_test_add_func("/test1",test1);
-	   g_test_add_func("/test2",test2);
-	   g_test_add_func("/test3",test3);
-	   g_test_add_func("/test6",test6);
+           g_test_add_func("/test_basic_spell_check",test_basic_spell_check);
+	   g_test_add_func("/test_spell_check_for_compdict_with_word_misspelled_in_one_of_the_langs",test_spell_check_for_compdict_with_word_misspelled_in_one_of_the_langs);
+	   g_test_add_func("/test_spell_check_for_compdict_for_word_with_no_suggestions_in_all_langs",test_spell_check_for_compdict_for_word_with_no_suggestions_in_all_langs);
+	   g_test_add_func("/test_spell_check_for_compdict_with_word_mispelled_in_all_langs",test_spell_check_for_compdict_with_word_mispelled_in_all_langs);
            g_test_run();
 	   
 return 0;
