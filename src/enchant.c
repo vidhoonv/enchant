@@ -1880,20 +1880,22 @@ ENCHANT_MODULE_EXPORT (EnchantDict *)
 enchant_broker_request_composite_dict (EnchantBroker * broker, const char *const tag_string)
 {
 	EnchantDict *composite_dict = NULL,*dict=NULL;
-	char *normalized_tag,*lang_tag;
+	char *normalized_tag;
 	char delimiter[] = ":"; // the tag_string will have several language tags seperated by ":" used as delimiter
 	GSList *dict_list = NULL;
 	char tags[strlen(tag_string)];
+	gchar **tag_strings,**tag_iter;
 
 	g_return_val_if_fail (broker, NULL);
 	g_return_val_if_fail (tag_string && strlen(tag_string), NULL);
 
 	enchant_broker_clear_error (broker);
 	strcpy(tags,tag_string);
-	lang_tag = strtok(tags, delimiter);
-	while(lang_tag != NULL)
+	tag_strings = g_strsplit(tag_string,delimiter,-1);
+	
+	for(tag_iter = tag_strings; *tag_iter; tag_iter++)
 	{
-		normalized_tag = enchant_normalize_dictionary_tag (lang_tag);
+		normalized_tag = enchant_normalize_dictionary_tag (tag_iter);
 		if(!enchant_is_valid_dictionary_tag(normalized_tag))
 		{
 			enchant_broker_set_error (broker, "invalid tag character found");
@@ -1907,10 +1909,9 @@ enchant_broker_request_composite_dict (EnchantBroker * broker, const char *const
 			dict_list = g_slist_append(dict_list,dict);
 			g_free (iso_639_only_tag);
 		}
-	lang_tag = strtok(NULL, delimiter);
 	}
-	
 	g_free (normalized_tag);
+	g_free(tag_strings);
 	composite_dict = composite_provider_create_dict(dict_list);
 	return composite_dict;
 }
