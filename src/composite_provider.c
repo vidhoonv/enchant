@@ -38,10 +38,6 @@
 #include "enchant.h"
 #include "enchant-provider.h"
 
-#ifdef __cplusplus
-extern "C" {
-#endif
-
 static int
 composite_dict_check (EnchantDict * me, const char *const word, size_t len)
 {
@@ -101,7 +97,3 @@ composite_provider_create_dict (GSList* list_of_dicts)
 
 	return dict;
 }
-
-#ifdef __cplusplus
-}
-#endif
