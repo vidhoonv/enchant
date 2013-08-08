@@ -17,7 +17,7 @@ libenchant_la_DEPENDENCIES = @ENCHANT_WIN32_RESOURCE@
 libenchant_la_SOURCES = prefix.c enchant.c pwl.c enchant.h prefix.h pwl.h composite_provider.c composite_provider.h
 
 libenchant_includedir = $(includedir)/enchant
-libenchant_include_HEADERS = enchant.h enchant-provider.h enchant++.h composite_provider.c composite_provider.h
+libenchant_include_HEADERS = enchant.h enchant-provider.h enchant++.h
 
 if WITH_APPLESPELL
 INCLUDES += @APPLESPELL_CFLAGS@
