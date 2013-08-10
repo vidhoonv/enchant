@@ -41,6 +41,32 @@
 static int
 composite_dict_check (EnchantDict * me, const char *const word, size_t len)
 {
+	CompositeDict *cdict;
+	int rval;
+	GSList *dict_list;
+	EnchantDict *dict;
+
+	cdict = (CompositeDict*) me->user_data;
+	g_return_if_fail (cdict);
+
+	dict_list =  cdict->dict_list;
+	g_return_if_fail (dict_list);
+	
+	dict = dict_list;
+	while(dict)
+	{
+		
+		if(dict->check)
+		{
+			rval = (*dict->check) (dict, word, len);
+			if(rval)
+				return 1; //look up success
+		}
+	dict =   g_slist_next(dict);
+	}
+        return 0; //either lookup error or lookup failed
+
+//not sure how to propogate look up error seperately
 }
 
 static char **
