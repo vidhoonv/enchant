@@ -1,4 +1,33 @@
 ## Compiled source ##
 *.o
 *.lo
+*.la
+*.rc
+
+## build generated files ##
+aclocal.m4
+Makefile
+Makefile.in
+autogen.err
+autom4te.cache/
+autopackage/default.apspec
+config.guess
+config.log
+config.status
+config.sub
+
+configure
+depcomp
+enchant-uninstalled.pc
+enchant.pc
+enchant.spec
+install-sh
+libtool
+ltmain.sh
+missing
+.deps/
+.libs/
+
+
+
 
